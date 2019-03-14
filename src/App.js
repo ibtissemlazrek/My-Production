@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Item from './Item';
+import AddItem from './AddItem';
 import './App.css';
-
 class App extends Component {
+  state ={
+    items:[{id:1,name:'hamza',age:22},
+    {id:2,name:'rahma',age:20},
+    {id:3,name:'ibtissem',age:25},
+    {id:3,name:'noura',age:25}
+  ]
+  }
+  deleteItem=(id)=>{
+    let items=this.state.items.filter(item=>{
+      return item.id !==id
+    })
+    this.setState({items})
+
+  }
+  addItem=(item)=>{
+    item.id=Math.random();
+   let items =this.state.items;
+   items.push(item);
+   this.setState({items})
+
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      Todolist-app
+    <Item items ={this.state.items} deleteItem={this.deleteItem} />
+    <AddItem  addItem={this.addItem}/>
+    
+        </div>
     );
   }
 }
